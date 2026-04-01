@@ -18,13 +18,13 @@ SET row_security = off;
 
 DROP DATABASE IF EXISTS posohina;
 --
--- Name: posohina; Type: DATABASE; Schema: -; Owner: app3
+-- Name: posohina; Type: DATABASE; Schema: -; Owner: app
 --
 
 CREATE DATABASE posohina WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE_PROVIDER = libc LOCALE = 'ru_RU.UTF-8';
 
 
-ALTER DATABASE posohina OWNER TO app3;
+ALTER DATABASE posohina OWNER TO app;
 
 \connect posohina
 
@@ -40,19 +40,19 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Name: business; Type: SCHEMA; Schema: -; Owner: app3
+-- Name: app; Type: SCHEMA; Schema: -; Owner: app
 --
 
-CREATE SCHEMA business;
+CREATE SCHEMA app;
 
 
-ALTER SCHEMA business OWNER TO app3;
+ALTER SCHEMA app OWNER TO app;
 
 --
--- Name: calculate_discount_posohina(integer); Type: FUNCTION; Schema: business; Owner: app3
+-- Name: calculate_discount_posohina(integer); Type: FUNCTION; Schema: app; Owner: app
 --
 
-CREATE FUNCTION business.calculate_discount_posohina(p_partner_id integer) RETURNS integer
+CREATE FUNCTION app.calculate_discount_posohina(p_partner_id integer) RETURNS integer
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -78,13 +78,13 @@ END;
 $$;
 
 
-ALTER FUNCTION business.calculate_discount_posohina(p_partner_id integer) OWNER TO app3;
+ALTER FUNCTION app.calculate_discount_posohina(p_partner_id integer) OWNER TO app;
 
 --
--- Name: calculate_total_sum_posohina(); Type: FUNCTION; Schema: business; Owner: app3
+-- Name: calculate_total_sum_posohina(); Type: FUNCTION; Schema: app; Owner: app
 --
 
-CREATE FUNCTION business.calculate_total_sum_posohina() RETURNS trigger
+CREATE FUNCTION app.calculate_total_sum_posohina() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -97,13 +97,13 @@ END;
 $$;
 
 
-ALTER FUNCTION business.calculate_total_sum_posohina() OWNER TO app3;
+ALTER FUNCTION app.calculate_total_sum_posohina() OWNER TO app;
 
 --
--- Name: refresh_partner_discount_posohina(integer); Type: FUNCTION; Schema: business; Owner: app3
+-- Name: refresh_partner_discount_posohina(integer); Type: FUNCTION; Schema: app; Owner: app
 --
 
-CREATE FUNCTION business.refresh_partner_discount_posohina(p_partner_id integer) RETURNS void
+CREATE FUNCTION app.refresh_partner_discount_posohina(p_partner_id integer) RETURNS void
     LANGUAGE plpgsql
     AS $$
 BEGIN
@@ -114,13 +114,13 @@ END;
 $$;
 
 
-ALTER FUNCTION business.refresh_partner_discount_posohina(p_partner_id integer) OWNER TO app3;
+ALTER FUNCTION app.refresh_partner_discount_posohina(p_partner_id integer) OWNER TO app;
 
 --
--- Name: trigger_discount_update_posohina(); Type: FUNCTION; Schema: business; Owner: app3
+-- Name: trigger_discount_update_posohina(); Type: FUNCTION; Schema: app; Owner: app
 --
 
-CREATE FUNCTION business.trigger_discount_update_posohina() RETURNS trigger
+CREATE FUNCTION app.trigger_discount_update_posohina() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -138,13 +138,13 @@ END;
 $$;
 
 
-ALTER FUNCTION business.trigger_discount_update_posohina() OWNER TO app3;
+ALTER FUNCTION app.trigger_discount_update_posohina() OWNER TO app;
 
 --
--- Name: update_timestamp_posohina(); Type: FUNCTION; Schema: business; Owner: app3
+-- Name: update_timestamp_posohina(); Type: FUNCTION; Schema: app; Owner: app
 --
 
-CREATE FUNCTION business.update_timestamp_posohina() RETURNS trigger
+CREATE FUNCTION app.update_timestamp_posohina() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
 BEGIN
@@ -154,29 +154,29 @@ END;
 $$;
 
 
-ALTER FUNCTION business.update_timestamp_posohina() OWNER TO app3;
+ALTER FUNCTION app.update_timestamp_posohina() OWNER TO app;
 
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
 
 --
--- Name: partner_types_posohina; Type: TABLE; Schema: business; Owner: app3
+-- Name: partner_types_posohina; Type: TABLE; Schema: app; Owner: app
 --
 
-CREATE TABLE business.partner_types_posohina (
+CREATE TABLE app.partner_types_posohina (
     id integer NOT NULL,
     name character varying(100) NOT NULL
 );
 
 
-ALTER TABLE business.partner_types_posohina OWNER TO app3;
+ALTER TABLE app.partner_types_posohina OWNER TO app;
 
 --
--- Name: partner_types_posohina_id_seq; Type: SEQUENCE; Schema: business; Owner: app3
+-- Name: partner_types_posohina_id_seq; Type: SEQUENCE; Schema: app; Owner: app
 --
 
-CREATE SEQUENCE business.partner_types_posohina_id_seq
+CREATE SEQUENCE app.partner_types_posohina_id_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -185,20 +185,20 @@ CREATE SEQUENCE business.partner_types_posohina_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE business.partner_types_posohina_id_seq OWNER TO app3;
+ALTER SEQUENCE app.partner_types_posohina_id_seq OWNER TO app;
 
 --
--- Name: partner_types_posohina_id_seq; Type: SEQUENCE OWNED BY; Schema: business; Owner: app3
+-- Name: partner_types_posohina_id_seq; Type: SEQUENCE OWNED BY; Schema: app; Owner: app
 --
 
-ALTER SEQUENCE business.partner_types_posohina_id_seq OWNED BY business.partner_types_posohina.id;
+ALTER SEQUENCE app.partner_types_posohina_id_seq OWNED BY app.partner_types_posohina.id;
 
 
 --
--- Name: partners_posohina; Type: TABLE; Schema: business; Owner: app3
+-- Name: partners_posohina; Type: TABLE; Schema: app; Owner: app
 --
 
-CREATE TABLE business.partners_posohina (
+CREATE TABLE app.partners_posohina (
     id integer NOT NULL,
     type_id integer NOT NULL,
     name character varying(200) NOT NULL,
@@ -214,13 +214,13 @@ CREATE TABLE business.partners_posohina (
 );
 
 
-ALTER TABLE business.partners_posohina OWNER TO app3;
+ALTER TABLE app.partners_posohina OWNER TO app;
 
 --
--- Name: partners_posohina_id_seq; Type: SEQUENCE; Schema: business; Owner: app3
+-- Name: partners_posohina_id_seq; Type: SEQUENCE; Schema: app; Owner: app
 --
 
-CREATE SEQUENCE business.partners_posohina_id_seq
+CREATE SEQUENCE app.partners_posohina_id_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -229,20 +229,20 @@ CREATE SEQUENCE business.partners_posohina_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE business.partners_posohina_id_seq OWNER TO app3;
+ALTER SEQUENCE app.partners_posohina_id_seq OWNER TO app;
 
 --
--- Name: partners_posohina_id_seq; Type: SEQUENCE OWNED BY; Schema: business; Owner: app3
+-- Name: partners_posohina_id_seq; Type: SEQUENCE OWNED BY; Schema: app; Owner: app
 --
 
-ALTER SEQUENCE business.partners_posohina_id_seq OWNED BY business.partners_posohina.id;
+ALTER SEQUENCE app.partners_posohina_id_seq OWNED BY app.partners_posohina.id;
 
 
 --
--- Name: products_posohina; Type: TABLE; Schema: business; Owner: app3
+-- Name: products_posohina; Type: TABLE; Schema: app; Owner: app
 --
 
-CREATE TABLE business.products_posohina (
+CREATE TABLE app.products_posohina (
     id integer NOT NULL,
     name character varying(200) NOT NULL,
     code character varying(50),
@@ -251,13 +251,13 @@ CREATE TABLE business.products_posohina (
 );
 
 
-ALTER TABLE business.products_posohina OWNER TO app3;
+ALTER TABLE app.products_posohina OWNER TO app;
 
 --
--- Name: products_posohina_id_seq; Type: SEQUENCE; Schema: business; Owner: app3
+-- Name: products_posohina_id_seq; Type: SEQUENCE; Schema: app; Owner: app
 --
 
-CREATE SEQUENCE business.products_posohina_id_seq
+CREATE SEQUENCE app.products_posohina_id_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -266,20 +266,20 @@ CREATE SEQUENCE business.products_posohina_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE business.products_posohina_id_seq OWNER TO app3;
+ALTER SEQUENCE app.products_posohina_id_seq OWNER TO app;
 
 --
--- Name: products_posohina_id_seq; Type: SEQUENCE OWNED BY; Schema: business; Owner: app3
+-- Name: products_posohina_id_seq; Type: SEQUENCE OWNED BY; Schema: app; Owner: app
 --
 
-ALTER SEQUENCE business.products_posohina_id_seq OWNED BY business.products_posohina.id;
+ALTER SEQUENCE app.products_posohina_id_seq OWNED BY app.products_posohina.id;
 
 
 --
--- Name: sales_posohina; Type: TABLE; Schema: business; Owner: app3
+-- Name: sales_posohina; Type: TABLE; Schema: app; Owner: app
 --
 
-CREATE TABLE business.sales_posohina (
+CREATE TABLE app.sales_posohina (
     id integer NOT NULL,
     partner_id integer NOT NULL,
     product_id integer NOT NULL,
@@ -291,13 +291,13 @@ CREATE TABLE business.sales_posohina (
 );
 
 
-ALTER TABLE business.sales_posohina OWNER TO app3;
+ALTER TABLE app.sales_posohina OWNER TO app;
 
 --
--- Name: sales_posohina_id_seq; Type: SEQUENCE; Schema: business; Owner: app3
+-- Name: sales_posohina_id_seq; Type: SEQUENCE; Schema: app; Owner: app
 --
 
-CREATE SEQUENCE business.sales_posohina_id_seq
+CREATE SEQUENCE app.sales_posohina_id_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -306,48 +306,48 @@ CREATE SEQUENCE business.sales_posohina_id_seq
     CACHE 1;
 
 
-ALTER SEQUENCE business.sales_posohina_id_seq OWNER TO app3;
+ALTER SEQUENCE app.sales_posohina_id_seq OWNER TO app;
 
 --
--- Name: sales_posohina_id_seq; Type: SEQUENCE OWNED BY; Schema: business; Owner: app3
+-- Name: sales_posohina_id_seq; Type: SEQUENCE OWNED BY; Schema: app; Owner: app
 --
 
-ALTER SEQUENCE business.sales_posohina_id_seq OWNED BY business.sales_posohina.id;
-
-
---
--- Name: partner_types_posohina id; Type: DEFAULT; Schema: business; Owner: app3
---
-
-ALTER TABLE ONLY business.partner_types_posohina ALTER COLUMN id SET DEFAULT nextval('business.partner_types_posohina_id_seq'::regclass);
+ALTER SEQUENCE app.sales_posohina_id_seq OWNED BY app.sales_posohina.id;
 
 
 --
--- Name: partners_posohina id; Type: DEFAULT; Schema: business; Owner: app3
+-- Name: partner_types_posohina id; Type: DEFAULT; Schema: app; Owner: app
 --
 
-ALTER TABLE ONLY business.partners_posohina ALTER COLUMN id SET DEFAULT nextval('business.partners_posohina_id_seq'::regclass);
-
-
---
--- Name: products_posohina id; Type: DEFAULT; Schema: business; Owner: app3
---
-
-ALTER TABLE ONLY business.products_posohina ALTER COLUMN id SET DEFAULT nextval('business.products_posohina_id_seq'::regclass);
+ALTER TABLE ONLY app.partner_types_posohina ALTER COLUMN id SET DEFAULT nextval('app.partner_types_posohina_id_seq'::regclass);
 
 
 --
--- Name: sales_posohina id; Type: DEFAULT; Schema: business; Owner: app3
+-- Name: partners_posohina id; Type: DEFAULT; Schema: app; Owner: app
 --
 
-ALTER TABLE ONLY business.sales_posohina ALTER COLUMN id SET DEFAULT nextval('business.sales_posohina_id_seq'::regclass);
+ALTER TABLE ONLY app.partners_posohina ALTER COLUMN id SET DEFAULT nextval('app.partners_posohina_id_seq'::regclass);
 
 
 --
--- Data for Name: partner_types_posohina; Type: TABLE DATA; Schema: business; Owner: app3
+-- Name: products_posohina id; Type: DEFAULT; Schema: app; Owner: app
 --
 
-COPY business.partner_types_posohina (id, name) FROM stdin;
+ALTER TABLE ONLY app.products_posohina ALTER COLUMN id SET DEFAULT nextval('app.products_posohina_id_seq'::regclass);
+
+
+--
+-- Name: sales_posohina id; Type: DEFAULT; Schema: app; Owner: app
+--
+
+ALTER TABLE ONLY app.sales_posohina ALTER COLUMN id SET DEFAULT nextval('app.sales_posohina_id_seq'::regclass);
+
+
+--
+-- Data for Name: partner_types_posohina; Type: TABLE DATA; Schema: app; Owner: app
+--
+
+COPY app.partner_types_posohina (id, name) FROM stdin;
 1	ООО
 2	ЗАО
 3	ИП
@@ -357,10 +357,10 @@ COPY business.partner_types_posohina (id, name) FROM stdin;
 
 
 --
--- Data for Name: partners_posohina; Type: TABLE DATA; Schema: business; Owner: app3
+-- Data for Name: partners_posohina; Type: TABLE DATA; Schema: app; Owner: app
 --
 
-COPY business.partners_posohina (id, type_id, name, director_fullname, phone, email, rating, discount, created_at, updated_at, address) FROM stdin;
+COPY app.partners_posohina (id, type_id, name, director_fullname, phone, email, rating, discount, created_at, updated_at, address) FROM stdin;
 1	1	Вектор	Смирнов Алексей Петрович	+7(911)222-33-44	vector@mail.ru	5	5	2026-03-15 01:35:50.766364	2026-03-15 01:35:50.818216	\N
 2	2	Альянс	Козлова Елена Викторовна	+7(922)333-44-55	alyans@yandex.ru	4	5	2026-03-15 01:35:50.766364	2026-03-15 01:35:50.818216	\N
 3	3	Соколов ИП	Соколов Дмитрий Игоревич	+7(933)444-55-66	sokolov@bk.ru	3	0	2026-03-15 01:35:50.766364	2026-03-15 02:07:00.003469	\N
@@ -369,10 +369,10 @@ COPY business.partners_posohina (id, type_id, name, director_fullname, phone, em
 
 
 --
--- Data for Name: products_posohina; Type: TABLE DATA; Schema: business; Owner: app3
+-- Data for Name: products_posohina; Type: TABLE DATA; Schema: app; Owner: app
 --
 
-COPY business.products_posohina (id, name, code, cost) FROM stdin;
+COPY app.products_posohina (id, name, code, cost) FROM stdin;
 1	Товар А-1	COD001	1200.00
 2	Товар Б-2	COD002	2800.00
 3	Товар В-3	COD003	650.00
@@ -382,10 +382,10 @@ COPY business.products_posohina (id, name, code, cost) FROM stdin;
 
 
 --
--- Data for Name: sales_posohina; Type: TABLE DATA; Schema: business; Owner: app3
+-- Data for Name: sales_posohina; Type: TABLE DATA; Schema: app; Owner: app
 --
 
-COPY business.sales_posohina (id, partner_id, product_id, quantity, sale_date, total_sum, created_at) FROM stdin;
+COPY app.sales_posohina (id, partner_id, product_id, quantity, sale_date, total_sum, created_at) FROM stdin;
 1	1	1	6000	2024-02-10	7200000.00	2026-03-15 01:35:50.793027
 2	1	2	4000	2024-03-15	11200000.00	2026-03-15 01:35:50.793027
 3	1	3	7000	2024-04-20	4550000.00	2026-03-15 01:35:50.793027
@@ -398,152 +398,152 @@ COPY business.sales_posohina (id, partner_id, product_id, quantity, sale_date, t
 
 
 --
--- Name: partner_types_posohina_id_seq; Type: SEQUENCE SET; Schema: business; Owner: app3
+-- Name: partner_types_posohina_id_seq; Type: SEQUENCE SET; Schema: app; Owner: app
 --
 
-SELECT pg_catalog.setval('business.partner_types_posohina_id_seq', 5, true);
-
-
---
--- Name: partners_posohina_id_seq; Type: SEQUENCE SET; Schema: business; Owner: app3
---
-
-SELECT pg_catalog.setval('business.partners_posohina_id_seq', 5, true);
+SELECT pg_catalog.setval('app.partner_types_posohina_id_seq', 5, true);
 
 
 --
--- Name: products_posohina_id_seq; Type: SEQUENCE SET; Schema: business; Owner: app3
+-- Name: partners_posohina_id_seq; Type: SEQUENCE SET; Schema: app; Owner: app
 --
 
-SELECT pg_catalog.setval('business.products_posohina_id_seq', 5, true);
-
-
---
--- Name: sales_posohina_id_seq; Type: SEQUENCE SET; Schema: business; Owner: app3
---
-
-SELECT pg_catalog.setval('business.sales_posohina_id_seq', 17, true);
+SELECT pg_catalog.setval('app.partners_posohina_id_seq', 5, true);
 
 
 --
--- Name: partner_types_posohina partner_types_posohina_name_key; Type: CONSTRAINT; Schema: business; Owner: app3
+-- Name: products_posohina_id_seq; Type: SEQUENCE SET; Schema: app; Owner: app
 --
 
-ALTER TABLE ONLY business.partner_types_posohina
+SELECT pg_catalog.setval('app.products_posohina_id_seq', 5, true);
+
+
+--
+-- Name: sales_posohina_id_seq; Type: SEQUENCE SET; Schema: app; Owner: app
+--
+
+SELECT pg_catalog.setval('app.sales_posohina_id_seq', 17, true);
+
+
+--
+-- Name: partner_types_posohina partner_types_posohina_name_key; Type: CONSTRAINT; Schema: app; Owner: app
+--
+
+ALTER TABLE ONLY app.partner_types_posohina
     ADD CONSTRAINT partner_types_posohina_name_key UNIQUE (name);
 
 
 --
--- Name: partner_types_posohina partner_types_posohina_pkey; Type: CONSTRAINT; Schema: business; Owner: app3
+-- Name: partner_types_posohina partner_types_posohina_pkey; Type: CONSTRAINT; Schema: app; Owner: app
 --
 
-ALTER TABLE ONLY business.partner_types_posohina
+ALTER TABLE ONLY app.partner_types_posohina
     ADD CONSTRAINT partner_types_posohina_pkey PRIMARY KEY (id);
 
 
 --
--- Name: partners_posohina partners_posohina_pkey; Type: CONSTRAINT; Schema: business; Owner: app3
+-- Name: partners_posohina partners_posohina_pkey; Type: CONSTRAINT; Schema: app; Owner: app
 --
 
-ALTER TABLE ONLY business.partners_posohina
+ALTER TABLE ONLY app.partners_posohina
     ADD CONSTRAINT partners_posohina_pkey PRIMARY KEY (id);
 
 
 --
--- Name: products_posohina products_posohina_code_key; Type: CONSTRAINT; Schema: business; Owner: app3
+-- Name: products_posohina products_posohina_code_key; Type: CONSTRAINT; Schema: app; Owner: app
 --
 
-ALTER TABLE ONLY business.products_posohina
+ALTER TABLE ONLY app.products_posohina
     ADD CONSTRAINT products_posohina_code_key UNIQUE (code);
 
 
 --
--- Name: products_posohina products_posohina_pkey; Type: CONSTRAINT; Schema: business; Owner: app3
+-- Name: products_posohina products_posohina_pkey; Type: CONSTRAINT; Schema: app; Owner: app
 --
 
-ALTER TABLE ONLY business.products_posohina
+ALTER TABLE ONLY app.products_posohina
     ADD CONSTRAINT products_posohina_pkey PRIMARY KEY (id);
 
 
 --
--- Name: sales_posohina sales_posohina_pkey; Type: CONSTRAINT; Schema: business; Owner: app3
+-- Name: sales_posohina sales_posohina_pkey; Type: CONSTRAINT; Schema: app; Owner: app
 --
 
-ALTER TABLE ONLY business.sales_posohina
+ALTER TABLE ONLY app.sales_posohina
     ADD CONSTRAINT sales_posohina_pkey PRIMARY KEY (id);
 
 
 --
--- Name: idx_partners_type_posohina; Type: INDEX; Schema: business; Owner: app3
+-- Name: idx_partners_type_posohina; Type: INDEX; Schema: app; Owner: app
 --
 
-CREATE INDEX idx_partners_type_posohina ON business.partners_posohina USING btree (type_id);
-
-
---
--- Name: idx_sales_date_posohina; Type: INDEX; Schema: business; Owner: app3
---
-
-CREATE INDEX idx_sales_date_posohina ON business.sales_posohina USING btree (sale_date);
+CREATE INDEX idx_partners_type_posohina ON app.partners_posohina USING btree (type_id);
 
 
 --
--- Name: idx_sales_partner_posohina; Type: INDEX; Schema: business; Owner: app3
+-- Name: idx_sales_date_posohina; Type: INDEX; Schema: app; Owner: app
 --
 
-CREATE INDEX idx_sales_partner_posohina ON business.sales_posohina USING btree (partner_id);
-
-
---
--- Name: idx_sales_product_posohina; Type: INDEX; Schema: business; Owner: app3
---
-
-CREATE INDEX idx_sales_product_posohina ON business.sales_posohina USING btree (product_id);
+CREATE INDEX idx_sales_date_posohina ON app.sales_posohina USING btree (sale_date);
 
 
 --
--- Name: sales_posohina calculate_total_before_insert_posohina; Type: TRIGGER; Schema: business; Owner: app3
+-- Name: idx_sales_partner_posohina; Type: INDEX; Schema: app; Owner: app
 --
 
-CREATE TRIGGER calculate_total_before_insert_posohina BEFORE INSERT ON business.sales_posohina FOR EACH ROW EXECUTE FUNCTION business.calculate_total_sum_posohina();
-
-
---
--- Name: sales_posohina trigger_discount_calculation_posohina; Type: TRIGGER; Schema: business; Owner: app3
---
-
-CREATE TRIGGER trigger_discount_calculation_posohina AFTER INSERT OR DELETE OR UPDATE ON business.sales_posohina FOR EACH ROW EXECUTE FUNCTION business.trigger_discount_update_posohina();
+CREATE INDEX idx_sales_partner_posohina ON app.sales_posohina USING btree (partner_id);
 
 
 --
--- Name: partners_posohina update_partners_timestamp_posohina; Type: TRIGGER; Schema: business; Owner: app3
+-- Name: idx_sales_product_posohina; Type: INDEX; Schema: app; Owner: app
 --
 
-CREATE TRIGGER update_partners_timestamp_posohina BEFORE UPDATE ON business.partners_posohina FOR EACH ROW EXECUTE FUNCTION business.update_timestamp_posohina();
-
-
---
--- Name: partners_posohina partners_posohina_type_id_fkey; Type: FK CONSTRAINT; Schema: business; Owner: app3
---
-
-ALTER TABLE ONLY business.partners_posohina
-    ADD CONSTRAINT partners_posohina_type_id_fkey FOREIGN KEY (type_id) REFERENCES business.partner_types_posohina(id) ON DELETE RESTRICT;
+CREATE INDEX idx_sales_product_posohina ON app.sales_posohina USING btree (product_id);
 
 
 --
--- Name: sales_posohina sales_posohina_partner_id_fkey; Type: FK CONSTRAINT; Schema: business; Owner: app3
+-- Name: sales_posohina calculate_total_before_insert_posohina; Type: TRIGGER; Schema: app; Owner: app
 --
 
-ALTER TABLE ONLY business.sales_posohina
-    ADD CONSTRAINT sales_posohina_partner_id_fkey FOREIGN KEY (partner_id) REFERENCES business.partners_posohina(id) ON DELETE CASCADE;
+CREATE TRIGGER calculate_total_before_insert_posohina BEFORE INSERT ON app.sales_posohina FOR EACH ROW EXECUTE FUNCTION app.calculate_total_sum_posohina();
 
 
 --
--- Name: sales_posohina sales_posohina_product_id_fkey; Type: FK CONSTRAINT; Schema: business; Owner: app3
+-- Name: sales_posohina trigger_discount_calculation_posohina; Type: TRIGGER; Schema: app; Owner: app
 --
 
-ALTER TABLE ONLY business.sales_posohina
-    ADD CONSTRAINT sales_posohina_product_id_fkey FOREIGN KEY (product_id) REFERENCES business.products_posohina(id) ON DELETE RESTRICT;
+CREATE TRIGGER trigger_discount_calculation_posohina AFTER INSERT OR DELETE OR UPDATE ON app.sales_posohina FOR EACH ROW EXECUTE FUNCTION app.trigger_discount_update_posohina();
+
+
+--
+-- Name: partners_posohina update_partners_timestamp_posohina; Type: TRIGGER; Schema: app; Owner: app
+--
+
+CREATE TRIGGER update_partners_timestamp_posohina BEFORE UPDATE ON app.partners_posohina FOR EACH ROW EXECUTE FUNCTION app.update_timestamp_posohina();
+
+
+--
+-- Name: partners_posohina partners_posohina_type_id_fkey; Type: FK CONSTRAINT; Schema: app; Owner: app
+--
+
+ALTER TABLE ONLY app.partners_posohina
+    ADD CONSTRAINT partners_posohina_type_id_fkey FOREIGN KEY (type_id) REFERENCES app.partner_types_posohina(id) ON DELETE RESTRICT;
+
+
+--
+-- Name: sales_posohina sales_posohina_partner_id_fkey; Type: FK CONSTRAINT; Schema: app; Owner: app
+--
+
+ALTER TABLE ONLY app.sales_posohina
+    ADD CONSTRAINT sales_posohina_partner_id_fkey FOREIGN KEY (partner_id) REFERENCES app.partners_posohina(id) ON DELETE CASCADE;
+
+
+--
+-- Name: sales_posohina sales_posohina_product_id_fkey; Type: FK CONSTRAINT; Schema: app; Owner: app
+--
+
+ALTER TABLE ONLY app.sales_posohina
+    ADD CONSTRAINT sales_posohina_product_id_fkey FOREIGN KEY (product_id) REFERENCES app.products_posohina(id) ON DELETE RESTRICT;
 
 
 --
